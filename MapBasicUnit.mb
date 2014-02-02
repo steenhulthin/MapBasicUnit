@@ -1,0 +1,26 @@
+'Include "mapbasic.def" 
+
+Type TestReport
+	testName As String
+	hasTestPassed As String
+	End Type
+
+Global testResults(10) As TestReport
+Global testResultsPointer As Integer
+
+Declare Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As String)
+
+Declare Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
+
+
+Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As String)
+If Actual <> TRUE then testResult = "Failed"
+Else testResult = "Passed"
+End If
+End Sub
+
+Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
+Dim testResult As String
+Call InternalAssertTrue(testName, actual, testResult)
+Print "Test: " + testName + " " + testResult
+End Sub
