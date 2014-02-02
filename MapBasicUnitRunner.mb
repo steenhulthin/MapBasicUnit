@@ -9,8 +9,13 @@ Dim actually As Logical
 actually = TRUE
 
 Call InternalAssertTrue(name, actually, testResultt)
-Note testResultT
+Print testResultT + " should be ""Passed"""
+
+Call InternalAssertTrue(name, FALSE, testResultt)
+Print testResultt + " should be ""Failed"""
 
 Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As String)
-testResult = "Passed"
+If Actual <> TRUE then testResult = "Failed"
+Else testResult = "Passed"
+End If
 End Sub
