@@ -1,0 +1,16 @@
+Include "mapbasic.def"
+
+Declare Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As String)
+
+Dim name, testResultt As String
+testResultt = "not set."
+name = "MetaTest"
+Dim actually As Logical
+actually = TRUE
+
+Call InternalAssertTrue(name, actually, testResultt)
+Note testResultT
+
+Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As String)
+testResult = "Passed"
+End Sub
