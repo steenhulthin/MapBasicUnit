@@ -12,11 +12,6 @@ Print "-----------"
 Print "new testrun." + Time(24)
 Print "-----------"
 
-Call InternalAssertTrue(name, actually, testResultt)
-Print testResultT + " should be ""Passed"""
-
-Call InternalAssertTrue(name, FALSE, testResultt)
-Print testResultt + " should be ""Failed"""
 
 Call AssertTrue("testThatAssertTrueReportsSuccessOnTrue", TRUE)
 
