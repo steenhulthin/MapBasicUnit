@@ -1,7 +1,9 @@
 Include "mapbasic.def"
 Include "MapBasicUnit.mb"
 
+Declare Sub Main
 
+Sub Main
 Dim name, testResultt As String
 testResultt = "not set."
 name = "MetaTest"
@@ -17,3 +19,4 @@ Call AssertTrue("testThatAssertTrueReportsSuccessOnTrue", TRUE)
 
 Call AssertTrue("testThatAssertTrueReportsFailureOnFalse", FALSE)
 
+End Sub

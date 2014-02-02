@@ -5,8 +5,9 @@ Type TestReport
 	hasTestPassed As String
 	End Type
 
-Global testResults(10) As TestReport
+Global testResults(1) As TestReport
 Global testResultsPointer As Integer
+
 
 Declare Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As TestReport)
 
