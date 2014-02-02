@@ -8,19 +8,19 @@ Type TestReport
 Global testResults(10) As TestReport
 Global testResultsPointer As Integer
 
-Declare Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As String)
+Declare Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As TestReport)
 
 Declare Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
 
 
-Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As String)
-If Actual <> TRUE then testResult = "Failed"
-Else testResult = "Passed"
+Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As TestReport)
+If Actual <> TRUE then testResult.hasTestPassed = "Failed"
+Else testResult.hasTestPassed = "Passed"
 End If
 End Sub
 
 Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
-Dim testResult As String
+Dim testResult As TestReport
 Call InternalAssertTrue(testName, actual, testResult)
-Print "Test: " + testName + " " + testResult
+Print "Test: " + testName + " " + testResult.hasTestPassed
 End Sub
