@@ -2,11 +2,17 @@ Include "mapbasic.def"
 
 Declare Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As String)
 
+Declare Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
+
 Dim name, testResultt As String
 testResultt = "not set."
 name = "MetaTest"
 Dim actually As Logical
 actually = TRUE
+
+Print "-----------"
+Print "new testrun."
+Print "-----------"
 
 Call InternalAssertTrue(name, actually, testResultt)
 Print testResultT + " should be ""Passed"""
@@ -14,8 +20,19 @@ Print testResultT + " should be ""Passed"""
 Call InternalAssertTrue(name, FALSE, testResultt)
 Print testResultt + " should be ""Failed"""
 
+Call AssertTrue("testThatAssertTrueReportsSuccessOnTrue", TRUE)
+
+Call AssertTrue("testThatAssertTrueReportsFailureOnFalse", FALSE)
+
+
 Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As String)
 If Actual <> TRUE then testResult = "Failed"
 Else testResult = "Passed"
 End If
+End Sub
+
+Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
+Dim testResult As String
+Call InternalAssertTrue(testName, actual, testResult)
+Print "Test: " + testName + " " + testResult
 End Sub
