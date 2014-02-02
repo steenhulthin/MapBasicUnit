@@ -12,8 +12,10 @@ Declare Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical
 
 Declare Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
 
+Declare Sub SaveTestresults(testResult As TestReport)
 
 Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As TestReport)
+testResult.testName = testName
 If Actual <> TRUE then testResult.hasTestPassed = "Failed"
 Else testResult.hasTestPassed = "Passed"
 End If
@@ -22,5 +24,9 @@ End Sub
 Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
 Dim testResult As TestReport
 Call InternalAssertTrue(testName, actual, testResult)
-Print "Test: " + testName + " " + testResult.hasTestPassed
+Call SaveTestresults(testResult)
+End Sub
+
+Sub SaveTestresults(testResult As TestReport)
+Print "Test: " + testResult.testName + " " + testResult.hasTestPassed
 End Sub
