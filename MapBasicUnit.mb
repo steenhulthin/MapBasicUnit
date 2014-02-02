@@ -29,5 +29,5 @@ Call SaveTestresults(testResult)
 End Sub
 
 Sub SaveTestresults(testResult As TestReport)
-Print "Test: " + testResult.testName + " " + testResult.hasTestPassed
+Print "Test: " + testResult.testName + " has " + testResult.hasTestPassed
 End Sub

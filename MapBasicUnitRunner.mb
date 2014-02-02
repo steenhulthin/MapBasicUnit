@@ -4,16 +4,10 @@ Include "MapBasicUnit.mb"
 Declare Sub Main
 
 Sub Main
-Dim name, testResultt As String
-testResultt = "not set."
-name = "MetaTest"
-Dim actually As Logical
-actually = TRUE
 
 Print "-----------"
 Print "new testrun." + Time(24)
 Print "-----------"
-
 
 Call AssertTrue("testThatAssertTrueReportsSuccessOnTrue", TRUE)
 
