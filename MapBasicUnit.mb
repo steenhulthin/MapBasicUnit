@@ -2,7 +2,9 @@
 
 Type TestReport
 	testName As String
-	hasTestPassed As String
+	hasTestPassed As Logical
+	actual As String
+	expected As String
 	End Type
 
 Global testResults(1) As TestReport
@@ -15,10 +17,18 @@ Declare Sub AssertTrue(Byval testName As String, ByVal actual As Logical)
 
 Declare Sub SaveTestresults(testResult As TestReport)
 
+Declare Function ConvertErrorReportToString(report As TestReport) As String
+
 Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As TestReport)
 testResult.testName = testName
-If Actual <> TRUE then testResult.hasTestPassed = "Failed"
-Else testResult.hasTestPassed = "Passed"
+If Actual then
+testResult.actual = "TRUE (type: Logical)"
+Else
+testResult.actual = "FALSE (type: Logical)"
+End If
+testResult.expected = "TRUE (type: Logical)"
+If Actual <> TRUE then testResult.hasTestPassed = FALSE
+Else testResult.hasTestPassed = TRUE
 End If
 End Sub
 
@@ -29,5 +39,13 @@ Call SaveTestresults(testResult)
 End Sub
 
 Sub SaveTestresults(testResult As TestReport)
-Print "Test: " + testResult.testName + " has " + testResult.hasTestPassed
+Print ConvertErrorReportToString(testResult)
 End Sub
+
+Function ConvertErrorReportToString(report As TestReport) As String
+If report.hasTestPassed <> TRUE then 
+	ConvertErrorReportToString = "Test: " + report.testName + " has FAILED. Expected " + report.expected + ", but was " + report.actual
+Else 
+	ConvertErrorReportToString = "Test: " + report.testName + " has passed."	
+End If
+End Function

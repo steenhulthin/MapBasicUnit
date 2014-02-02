@@ -9,8 +9,32 @@ Print "-----------"
 Print "new testrun." + Time(24)
 Print "-----------"
 
-Call AssertTrue("testThatAssertTrueReportsSuccessOnTrue", TRUE)
+Call AssertTrue("ThisTestShouldPass", TRUE)
 
-Call AssertTrue("testThatAssertTrueReportsFailureOnFalse", FALSE)
+Call AssertTrue("ThisTestShouldFail", FALSE)
+
+Dim report As TestReport
+report.testName = "testThatErrorConverterPresentsPassingTests"
+report.hasTestPassed = TRUE
+report.actual = "TRUE (type: Logical)"
+report.expected = "TRUE (type: Logical)"
+Dim actual As Logical
+If ConvertErrorReportToString(report) <> "Test: testThatErrorConverterPresentsPassingTests has passed." then
+actual = FALSE
+else 
+actual = TRUE
+End If
+Call AssertTrue("testThatErrorConverterPresentsPassingTests", actual)
+
+report.testName = "testThatErrorConverterPresentsFailingTests"
+report.hasTestPassed = FALSE
+report.actual = "FALSE (type: Logical)"
+report.expected = "TRUE (type: Logical)"
+If ConvertErrorReportToString(report) <> "Test: testThatErrorConverterPresentsFailingTests has FAILED. Expected TRUE (type: Logical), but was FALSE (type: Logical)" then
+actual = FALSE
+else 
+actual = TRUE
+End If
+Call AssertTrue("testThatErrorConverterPresentsFailingTests", actual)
 
 End Sub
