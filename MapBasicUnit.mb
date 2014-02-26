@@ -7,13 +7,13 @@ Type TestReport
 	expected As String
 	End Type
 
-Global testResults(1) As TestReport
-Global testResultsPointer As Integer
-
-
 Declare Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As TestReport)
 
 Declare Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
+
+Declare Sub InternalAssertStringEqual(ByVal testName As String, ByVal expected As String, ByVal actual As String, testResult As TestReport)
+
+Declare Sub AssertStringEqual(Byval testName As String, Byval expected As String, Byval actual As String)
 
 Declare Sub SaveTestresults(testResult As TestReport)
 
@@ -32,9 +32,24 @@ Else testResult.hasTestPassed = TRUE
 End If
 End Sub
 
+Sub InternalAssertStringEqual(ByVal testName As String, ByVal expected As String, ByVal actual As String, testResult As TestReport)
+testResult.testName = testName
+testResult.expected = expected + " (type: String)"
+testResult.actual = actual + " (type: String)"
+If StringCompare( expected, actual ) = 0 then testResult.hasTestPassed = True
+Else testResult.hasTestPassed = False
+End If
+End Sub
+
 Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
 Dim testResult As TestReport
 Call InternalAssertTrue(testName, actual, testResult)
+Call SaveTestresults(testResult)
+End Sub
+
+Sub AssertStringEqual(Byval testName As String, Byval expected As String, Byval actual As String)
+Dim testResult As TestReport
+Call InternalAssertStringEqual(testName, expected, actual, testResult)
 Call SaveTestresults(testResult)
 End Sub
 
