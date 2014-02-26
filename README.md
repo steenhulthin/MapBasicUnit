@@ -86,6 +86,7 @@ Then you can write a unit test like this:
     End Sub
 
 In MapInfo the `Message` window will show:
+
     -----------
     new testrun.22:09:07
     -----------
