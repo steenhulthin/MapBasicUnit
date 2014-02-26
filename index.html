@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Mapbasicunit by steenhulthin</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Mapbasicunit</h1>
+          <h2>An Unit Test System for MapBasic</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/steenhulthin/MapBasicUnit/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/steenhulthin/MapBasicUnit/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/steenhulthin/MapBasicUnit" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="mapbasicunit" class="anchor" href="#mapbasicunit"><span class="octicon octicon-link"></span></a>MapBasicUnit</h1>
+
+<h2>
+<a name="an-unit-test-system-for-mapbasic" class="anchor" href="#an-unit-test-system-for-mapbasic"><span class="octicon octicon-link"></span></a>An Unit Test System for MapBasic</h2>
+
+<p><a href="http://www.mapinfo.com/product/mapinfo-mapbasic/">MapBasic</a> is language for automating <a href="http://www.mapinfo.com/products/desktop/">MapInfo</a>, which is a desktop <a href="http://en.wikipedia.org/wiki/Geographic_information_system">GIS</a>. </p>
+
+<p>MapBasicUnit aims to give MapBasic developers a structured way of testing their code that can be automated. </p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<ol>
+<li>Create a testrunner .mb file</li>
+<li>Include the MapBasicUnit.mb</li>
+<li>Include the .mb file that you want to test</li>
+<li>Start writing unit test with assertions</li>
+</ol><p><em>Hopefully this process will be simplified in later versions</em></p>
+
+<h3>
+<a name="create-a-testrunner-mb-file" class="anchor" href="#create-a-testrunner-mb-file"><span class="octicon octicon-link"></span></a>Create a testrunner .mb file</h3>
+
+<p>The basic testrunner:
+    Declare Sub Main</p>
+
+<pre><code>Sub Main
+Print "-----------"
+Print "new testrun." + Time(24)
+Print "-----------"
+End Sub
+</code></pre>
+
+<p>Save the file. The suggested naming convention is test_.mb.</p>
+
+<h3>
+<a name="include-the-mapbasicunitmb" class="anchor" href="#include-the-mapbasicunitmb"><span class="octicon octicon-link"></span></a>Include the MapBasicUnit.mb</h3>
+
+<p>If MapBasicUnit is located in the same directory as the testrunner:
+    Include "MapBasicUnit.mb"</p>
+
+<pre><code>Declare Sub Main
+
+Sub Main
+Print "-----------"
+Print "new testrun." + Time(24)
+Print "-----------"
+End Sub
+</code></pre>
+
+<h3>
+<a name="include-the-mb-file-that-you-want-to-test" class="anchor" href="#include-the-mb-file-that-you-want-to-test"><span class="octicon octicon-link"></span></a>Include the .mb file that you want to test</h3>
+
+<p>If the .mb that you want to test is located in the same directory as the testrunner:
+    Include "MapBasicUnit.mb"
+    Include ".mb"</p>
+
+<pre><code>Declare Sub Main
+
+Sub Main
+Print "-----------"
+Print "new testrun." + Time(24)
+Print "-----------"
+End Sub
+</code></pre>
+
+<h3>
+<a name="start-writing-unit-test-with-assertions" class="anchor" href="#start-writing-unit-test-with-assertions"><span class="octicon octicon-link"></span></a>Start writing unit test with assertions</h3>
+
+<p>Let's say that you have a mb file called Trim.mb with the following content:</p>
+
+<pre><code>Declare Function Trim(Byval word As String) As String
+
+Function Trim(Byval word As String) As String
+Trim = LTrim$(RTrim$(word))
+End Function
+</code></pre>
+
+<p>Then you can write a unit test like this:</p>
+
+<pre><code>Include "Trim.mb"
+Include "MapBasicUnit.mb"
+
+Declare Sub Main
+
+Sub Main
+Print "-----------"
+Print "new testrun." + Time(24)
+Print "-----------"
+
+Call AssertStringEqual("TestThatStringIsTrimmed", "trimmed string", Trim(" trimmed string  "))
+
+End Sub
+</code></pre>
+
+<p>In MapInfo the <code>Message</code> window will show:</p>
+
+<pre><code>-----------
+new testrun.22:09:07
+-----------
+Test: TestThatStringIsTrimmed has passed.
+</code></pre>
+        </section>
+
+        <footer>
+          Mapbasicunit is maintained by <a href="https://github.com/steenhulthin">steenhulthin</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
