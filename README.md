@@ -92,3 +92,16 @@ In MapInfo the `Message` window will show:
     new testrun.22:09:07
     -----------
     Test: TestThatStringIsTrimmed has passed.
+
+Features
+--------
+
+The following assertions are currently available in the `MapBasicUnit.mb`:
+
+    (Call) AssertTrue(Byval testName As String, ByVal actual As Logical)
+    (Call) AssertStringEqual(Byval testName As String, Byval expected As String, Byval actual As String)
+    (Call) AssertIntegerEqual(Byval testName As String, Byval expected As Integer, Byval actual As Integer)
+
+`Assertions` are always takes a `testName` argument for identification of the assertion. It is strongly recommended that the `testName` is unique. 
+
+Currently test runs are reported through the MapInfo `message` window, but this may be configurable in the future to enable writing test failures and passes to a file to allow integration with a continues integration system.
