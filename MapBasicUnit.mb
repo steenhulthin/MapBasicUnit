@@ -15,6 +15,10 @@ Declare Sub InternalAssertStringEqual(ByVal testName As String, ByVal expected A
 
 Declare Sub AssertStringEqual(Byval testName As String, Byval expected As String, Byval actual As String)
 
+Declare Sub InternalAssertIntegerEqual(ByVal testName As String, ByVal expected As Integer, ByVal actual As Integer, testResult As TestReport)
+
+Declare Sub AssertIntegerEqual(Byval testName As String, Byval expected As Integer, Byval actual As Integer)
+
 Declare Sub SaveTestresults(testResult As TestReport)
 
 Declare Function ConvertErrorReportToString(report As TestReport) As String
@@ -41,6 +45,16 @@ Else testResult.hasTestPassed = False
 End If
 End Sub
 
+Sub InternalAssertIntegerEqual(ByVal testName As String, ByVal expected As Integer, ByVal actual As Integer, testResult As TestReport)
+testResult.testName = testName
+testResult.expected = expected + " (type: Integer)"
+testResult.actual = actual + " (type: Integer)"
+If expected = actual then testResult.hasTestPassed = True
+Else testResult.hasTestPassed = False
+End If
+
+End Sub
+
 Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
 Dim testResult As TestReport
 Call InternalAssertTrue(testName, actual, testResult)
@@ -50,6 +64,12 @@ End Sub
 Sub AssertStringEqual(Byval testName As String, Byval expected As String, Byval actual As String)
 Dim testResult As TestReport
 Call InternalAssertStringEqual(testName, expected, actual, testResult)
+Call SaveTestresults(testResult)
+End Sub
+
+Sub AssertIntegerEqual(Byval testName As String, Byval expected As Integer, Byval actual As Integer)
+Dim testResult As TestReport
+Call InternalAssertIntegerEqual(testName, expected, actual, testResult)
 Call SaveTestresults(testResult)
 End Sub
 

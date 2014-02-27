@@ -15,6 +15,7 @@ Call AssertTrue("ThisTestShouldFail", FALSE)
 
 Dim StringToTest As String
 Dim report As TestReport
+
 report.testName = "testThatErrorConverterPresentsPassingTests"
 report.hasTestPassed = TRUE
 report.actual = "TRUE (type: Logical)"
@@ -43,5 +44,12 @@ StringToTest = "string to test"
 Call AssertStringEqual("AssertPassesWhenInstancesOfTheSameStringAreEqual", StringToTest, StringToTest)
 
 Call AssertStringEqual("AssertFailsWhenStringDifferent", StringToTest, UCase$(StringToTest))
+
+Dim one as Integer
+Dim two as Integer
+one = 1
+two = 2
+Call AssertIntegerEqual("AssertIntegerEqualPassesWhenSameIntegerIsTested", one, one)
+Call AssertIntegerEqual("AssertIntegerEqualFailsWhenDifferentValuesAreTested", one, two)
 
 End Sub
