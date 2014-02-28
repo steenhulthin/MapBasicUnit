@@ -110,11 +110,13 @@ The following assertions are currently available in the `MapBasicUnit.mb`:
 Example:
 
 **Fails**
+
     Dim almostZero as Float
     almostZero = (1.00000000000001 - 1) - 0.00000000000001
     Call AssertFloatEqual("AssertFloatEqualFailsWhenRoundingIsTested", 0.0, almostZero, 0.0)
 
 **Passes**
+
     Dim almostZero as Float
     almostZero = (1.00000000000001 - 1) - 0.00000000000001
     Call AssertFloatEqual("AssertFloatEqualPassesWhenWithinRoundingNegativeIsTested", 0.0, almostZero, 0.000001)
