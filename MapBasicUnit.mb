@@ -19,6 +19,10 @@ Declare Sub InternalAssertIntegerEqual(ByVal testName As String, ByVal expected 
 
 Declare Sub AssertIntegerEqual(Byval testName As String, Byval expected As Integer, Byval actual As Integer)
 
+Declare Sub InternalAssertFloatEqual(ByVal testName As String, ByVal expected As Float, ByVal actual As Float, testResult As TestReport, Byval within As Float)
+
+Declare Sub AssertFloatEqual(Byval testName As String, Byval expected As Float, Byval actual As Float, Byval within As Float)
+
 Declare Sub SaveTestresults(testResult As TestReport)
 
 Declare Function ConvertErrorReportToString(report As TestReport) As String
@@ -52,7 +56,15 @@ testResult.actual = actual + " (type: Integer)"
 If expected = actual then testResult.hasTestPassed = True
 Else testResult.hasTestPassed = False
 End If
+End Sub
 
+Sub InternalAssertFloatEqual(ByVal testName As String, ByVal expected As Float, ByVal actual As Float, testResult As TestReport, Byval within As Float)
+testResult.testName = testName
+testResult.expected = expected + " (type: Float)"
+testResult.actual = actual + " (type: Float)"
+If actual - expected Between -within And within then testResult.hasTestPassed = True
+Else testResult.hasTestPassed = False
+End If
 End Sub
 
 Sub AssertTrue(Byval testName As String, ByVal actual As Logical) 
@@ -70,6 +82,12 @@ End Sub
 Sub AssertIntegerEqual(Byval testName As String, Byval expected As Integer, Byval actual As Integer)
 Dim testResult As TestReport
 Call InternalAssertIntegerEqual(testName, expected, actual, testResult)
+Call SaveTestresults(testResult)
+End Sub
+
+Sub AssertFloatEqual(Byval testName As String, Byval expected As Float, Byval actual As Float, Byval within As Float)
+Dim testResult As TestReport
+Call InternalAssertFloatEqual(testName, expected, actual, testResult, within)
 Call SaveTestresults(testResult)
 End Sub
 

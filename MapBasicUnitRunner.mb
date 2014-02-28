@@ -52,4 +52,18 @@ two = 2
 Call AssertIntegerEqual("AssertIntegerEqualPassesWhenSameIntegerIsTested", one, one)
 Call AssertIntegerEqual("AssertIntegerEqualFailsWhenDifferentValuesAreTested", one, two)
 
+Dim onePointZero as Float
+onePointZero = 1.0
+Call AssertFloatEqual("AssertFloatEqualPassesWhenSameFloatIsTested", onePointZero, onePointZero, 0.0)
+Dim twoPointZero as Float
+twoPointZero = 2.0
+Call AssertFloatEqual("AssertFloatEqualFailsWhenDifferentFloatsAreTested", onePointZero, twoPointZero, 0.0)
+Dim almostZero as Float
+almostZero = (1.00000000000001 - 1) - 0.00000000000001
+
+Call AssertFloatEqual("AssertFloatEqualFailsWhenRoundingIsTested", 0.0, almostZero, 0.0)
+Call AssertFloatEqual("AssertFloatEqualPassesWhenWithinRoundingNegativeIsTested", 0.0, almostZero, 0.000001)
+Call AssertFloatEqual("AssertFloatEqualPassesWhenWithinRoundingPositiveIsTested", 0.0, -almostZero, 0.000001)
+
+
 End Sub
