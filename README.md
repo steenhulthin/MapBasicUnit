@@ -101,7 +101,26 @@ The following assertions are currently available in the `MapBasicUnit.mb`:
     (Call) AssertTrue(Byval testName As String, ByVal actual As Logical)
     (Call) AssertStringEqual(Byval testName As String, Byval expected As String, Byval actual As String)
     (Call) AssertIntegerEqual(Byval testName As String, Byval expected As Integer, Byval actual As Integer)
+    (Call) AssertFloatEqual(Byval testName As String, Byval expected As Float, Byval actual As Float, Byval within As Float)
 
 `Assertions` are always takes a `testName` argument for identification of the assertion. It is strongly recommended that the `testName` is unique. 
+
+`AssertFloatEqual` takes a `within` argument so that inaccuracies in the `Float` calculus can be accounted for.
+
+Example:
+
+    Dim almostZero as Float
+    almostZero = (1.00000000000001 - 1) - 0.00000000000001
+    Call AssertFloatEqual("AssertFloatEqualFailsWhenRoundingIsTested", 0.0, almostZero, 0.0)
+
+**Fails**
+
+but 
+
+    Dim almostZero as Float
+    almostZero = (1.00000000000001 - 1) - 0.00000000000001
+    Call AssertFloatEqual("AssertFloatEqualPassesWhenWithinRoundingNegativeIsTested", 0.0, almostZero, 0.000001)
+
+**Passes**
 
 Currently test runs are reported through the MapInfo `message` window, but this may be configurable in the future to enable writing test failures and passes to a file to allow integration with a continues integration system.
