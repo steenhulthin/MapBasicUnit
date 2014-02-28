@@ -109,18 +109,14 @@ The following assertions are currently available in the `MapBasicUnit.mb`:
 
 Example:
 
+**Fails**
     Dim almostZero as Float
     almostZero = (1.00000000000001 - 1) - 0.00000000000001
     Call AssertFloatEqual("AssertFloatEqualFailsWhenRoundingIsTested", 0.0, almostZero, 0.0)
 
-**Fails**
-
-but 
-
+**Passes**
     Dim almostZero as Float
     almostZero = (1.00000000000001 - 1) - 0.00000000000001
     Call AssertFloatEqual("AssertFloatEqualPassesWhenWithinRoundingNegativeIsTested", 0.0, almostZero, 0.000001)
-
-**Passes**
 
 Currently test runs are reported through the MapInfo `message` window, but this may be configurable in the future to enable writing test failures and passes to a file to allow integration with a continues integration system.
