@@ -100,8 +100,8 @@ End Sub
 
 Function ConvertErrorReportToString(report As TestReport) As String
 If report.hasTestPassed <> TRUE then 
-	ConvertErrorReportToString = "Test: " + report.testName + " has FAILED. Expected " + report.expected + ", but was " + report.actual
+	ConvertErrorReportToString = "X FAILED - Test: " + report.testName + ". Expected " + report.expected + ", but was " + report.actual
 Else 
-	ConvertErrorReportToString = "Test: " + report.testName + " has passed."	
+	ConvertErrorReportToString = "0 passed - Test: " + report.testName + "."	
 End If
 End Function

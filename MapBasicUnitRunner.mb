@@ -21,24 +21,13 @@ report.hasTestPassed = TRUE
 report.actual = "TRUE (type: Logical)"
 report.expected = "TRUE (type: Logical)"
 Dim actual As Logical
-If ConvertErrorReportToString(report) <> "Test: testThatErrorConverterPresentsPassingTests has passed." then
-actual = FALSE
-else 
-actual = TRUE
-End If
-Call AssertTrue("testThatErrorConverterPresentsPassingTests", actual)
+Call AssertStringEqual("testThatErrorConverterPresentsPassingTests", "0 passed - Test: testThatErrorConverterPresentsPassingTests.", ConvertErrorReportToString(report))
 
 report.testName = "testThatErrorConverterPresentsFailingTests"
 report.hasTestPassed = FALSE
 report.actual = "FALSE (type: Logical)"
 report.expected = "TRUE (type: Logical)"
-If ConvertErrorReportToString(report) <> "Test: testThatErrorConverterPresentsFailingTests has FAILED. Expected TRUE (type: Logical), but was FALSE (type: Logical)" then
-actual = FALSE
-else 
-actual = TRUE
-End If
-Call AssertTrue("testThatErrorConverterPresentsFailingTests", actual)
-
+Call AssertStringEqual("testThatErrorConverterPresentsFailingTests", "X FAILED - Test: testThatErrorConverterPresentsFailingTests. Expected TRUE (type: Logical), but was FALSE (type: Logical)", ConvertErrorReportToString(report))
 
 StringToTest = "string to test"
 Call AssertStringEqual("AssertPassesWhenInstancesOfTheSameStringAreEqual", StringToTest, StringToTest)
