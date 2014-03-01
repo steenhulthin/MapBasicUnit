@@ -1,12 +1,14 @@
 ' Uncomment the line below only if the mapbasic.def has not been included already
 'Include "mapbasic.def" 
 
+
+
 Type TestReport
 	testName As String
 	hasTestPassed As Logical
 	actual As String
 	expected As String
-	End Type
+End Type
 
 Declare Sub InternalAssertTrue(ByVal testName As String, ByVal Actual As Logical, testResult As TestReport)
 
