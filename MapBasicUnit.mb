@@ -1,3 +1,4 @@
+' Uncomment the line below only if the mapbasic.def has not been included already
 'Include "mapbasic.def" 
 
 Type TestReport
@@ -92,7 +93,9 @@ Call SaveTestresults(testResult)
 End Sub
 
 Sub SaveTestresults(testResult As TestReport)
-Print ConvertErrorReportToString(testResult)
+Dim testResultString As String
+testResultString = ConvertErrorReportToString(testResult)
+Print testResultString
 End Sub
 
 Function ConvertErrorReportToString(report As TestReport) As String
