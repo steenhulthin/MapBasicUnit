@@ -101,6 +101,7 @@ The following assertions are currently available in the `MapBasicUnit.mb`:
     (Call) AssertTrue(Byval testName As String, ByVal actual As Logical)
     (Call) AssertStringEqual(Byval testName As String, Byval expected As String, Byval actual As String)
     (Call) AssertIntegerEqual(Byval testName As String, Byval expected As Integer, Byval actual As Integer)
+    (Call) AssertSmallIntEqual(Byval testName As String, Byval expected As SmallInt, Byval actual As SmallInt)
     (Call) AssertFloatEqual(Byval testName As String, Byval expected As Float, Byval actual As Float, Byval within As Float)
 
 `Assertions` are always takes a `testName` argument for identification of the assertion. It is strongly recommended that the `testName` is unique. 

@@ -26,6 +26,10 @@ Declare Sub InternalAssertFloatEqual(ByVal testName As String, ByVal expected As
 
 Declare Sub AssertFloatEqual(Byval testName As String, Byval expected As Float, Byval actual As Float, Byval within As Float)
 
+Declare Sub InternalAssertSmallIntEqual(ByVal testName As String, ByVal expected As SmallInt, ByVal actual As SmallInt, testResult As TestReport)
+
+Declare Sub AssertSmallIntEqual(Byval testName As String, Byval expected As SmallInt, Byval actual As SmallInt)
+
 Declare Sub SaveTestresults(testResult As TestReport)
 
 Declare Function ConvertErrorReportToString(report As TestReport) As String
@@ -91,6 +95,21 @@ End Sub
 Sub AssertFloatEqual(Byval testName As String, Byval expected As Float, Byval actual As Float, Byval within As Float)
 Dim testResult As TestReport
 Call InternalAssertFloatEqual(testName, expected, actual, testResult, within)
+Call SaveTestresults(testResult)
+End Sub
+
+Sub InternalAssertSmallIntEqual(ByVal testName As String, ByVal expected As SmallInt, ByVal actual As SmallInt, testResult As TestReport)
+testResult.testName = testName
+testResult.expected = expected + " (type: SmallInt)"
+testResult.actual = actual + " (type: SmallInt)"
+If expected = actual then testResult.hasTestPassed = True
+Else testResult.hasTestPassed = False
+End If
+End Sub
+
+Sub AssertSmallIntEqual(Byval testName As String, Byval expected As SmallInt, Byval actual As SmallInt)
+Dim testResult As TestReport
+Call InternalAssertSmallIntEqual(testName, expected, actual, testResult)
 Call SaveTestresults(testResult)
 End Sub
 
